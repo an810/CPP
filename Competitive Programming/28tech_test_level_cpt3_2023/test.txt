@@ -1,0 +1,6 @@
+5 6 
+2 3 4 2 1 
+-> 1 2 2 3 4
+bsearch(2,4)
+    l=2 r=4 m=3 res=2
+    totalgap=1

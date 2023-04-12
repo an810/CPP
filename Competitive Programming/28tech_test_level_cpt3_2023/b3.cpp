@@ -2,27 +2,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int countWords(string str) {
-    int wordCount = 0;
-    bool inWord = false;
-    
-    for (char c : str) {
-        if (c == ' ' || c == '\n' || c == '\t') {
-            if (inWord) {
-                wordCount++;
-                inWord = false;
-            }
-        } else {
-            inWord = true;
-        }
-    }
-    if (inWord) {
-        wordCount++;
-    }
-    
-    return wordCount;
-}
-
 int main() {
     int t;
     cin >> t;
@@ -31,8 +10,11 @@ int main() {
     for (int i = 0; i < t; i++) {
         string line;
         getline(cin, line);
-        int wordCount = countWords(line);
-        cout << wordCount << endl;
+        stringstream ss(line);
+        string in;
+        int cnt = 0;
+        while(ss >> in) cnt++;
+        cout << cnt << '\n';
     }
     
     return 0;

@@ -1,10 +1,11 @@
-// link: https://codeforces.com/group/cGzZeXNyzp/contest/433846/problem/B4
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int n, t, l, r;
-int a[1000010];
-long long res[1000010];
+#define FOR(x,a,b,i) for (int x=(a),_b=(b),_i=(i);x<=_b;x+=_i)
+#define FOD(x,a,b,i) for (int x=(a),_b=(b),_i=(i);x>=_b;x-=_i)
+#define FOV(it,v) for (auto it=v.begin();it!=v.end();it++) 
+#define MOD (1e9+7)
+#define ll long long
 
 template <typename T> inline void read(T &x)
 {
@@ -40,21 +41,11 @@ template <typename T> inline void writeln(T x)
     putchar('\n');
 }
 
+int random(int l,int r)
+{
+    return 1 + rand() % (r - l + 1);
+}
+
 int main()
 {
-    read(n);
-    for (int i=1; i<=n; i++)
-    {
-        read(a[i]);
-        res[i] = res[i-1] + a[i];
-    }
-    read(t);
-    while (t--)
-    {
-        read(l);read(r);
-        long long ans = res[r] - res[l-1];
-        writeln(ans);
-    }
-
-    return 0;
 }

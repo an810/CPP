@@ -1,0 +1,4 @@
+a / b /c / d 
+b-a / c-a / d-a
+c-a-b+a / d-a-b+a = c-b / d-b 
+d-b-c+b = d-c 

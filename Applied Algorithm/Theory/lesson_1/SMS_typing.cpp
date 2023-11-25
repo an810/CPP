@@ -13,6 +13,7 @@ int main()
                     "", " ", ""};
     int t; cin >> t;
     while (t--) {
+        fflush(stdin);
         string line ;
         getline(cin, line);
         int cnt = 0;

@@ -12,14 +12,25 @@ string bigsum(string a, string b) {
     reverse(b.begin(), b.end());
     int len_a = a.length(), len_b = b.length();
     int len = min(len_a, len_b);
-    int temp = 0;
+    int temp = 0, sum;
     for (int i = 0; i < len; i++) {
         int num1 = a[i] -'0';
         int num2 = b[i] - '0';
-        int sum = num1 + num2;
-        res += (sum % 10 + temp) + '0';
-        temp = sum / 10;
+        sum = num1 + num2;
+        res += (sum + temp) % 10 + '0';
+        temp = (sum + temp) / 10;
     }
+    for (int i = len; i < len_a; i++) {
+        int num1 = a[i] - '0';
+        res += (num1 + temp) % 10 + '0';
+        temp = (num1 + temp) / 10;
+    }
+    for (int i = len; i < len_b; i++) {
+        int num2 = b[i] - '0';
+        res += (num2 + temp) % 10  + '0';
+        temp = (num2 + temp) / 10;
+    }
+    if (temp) res += temp +'0';
     reverse(res.begin(), res.end());
     return res;
 }

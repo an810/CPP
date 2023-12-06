@@ -21,7 +21,7 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(NULL);cout.tie(NULL);
     cin >> n;
-    
+
     for (int i = 1; i <= n; i++) {
         cin >> a[i];
     }
@@ -32,7 +32,7 @@ int main()
     for (int i = 3; i <= n; ++i) {
         dp[i] = max({dp[i-1], dp[i-2] + a[i], dp[i-3] + a[i-1] + a[i]});
     }
-    for (int i = 1; i <= n; i++) cout << dp[i] << " ";
+    // for (int i = 1; i <= n; i++) cout << dp[i] << " ";
     cout<< dp[n];
     return 0;
 }

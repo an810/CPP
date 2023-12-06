@@ -1,59 +1,65 @@
-#include <iostream>
-#include <vector>
-
+#include<bits/stdc++.h>
 using namespace std;
-int arr[100000];
-int n;
-int x; 
-int m;
-int cnt;
+
+int n,k,m;
+int a[21];
+vector<int> x(k+1);
+bool visited[21];
 int sum;
-int visited[100000] = {0};
-int result[10000];
+set<vector<int>> res;
 
-int check(int v, int k)
-{
-    if (k == x)
-        return sum + arr[v] == m;
-    else return 1;
+
+int sum_j(int j){
+    if(j == 0){
+        return 0;
+    }
+    int sum = 0;
+    for(int  i = 1; i <= j; i++){
+        sum += x[i];
+    }
+    return sum;
 }
 
-void prinConfiguration()
-{
-    for (int i = 1; i <= x; i++)
-        cout << result[i] << " ";
-    cout << endl;
-}
-
-void Try(int k)
-{
-    for (int v = 1; v <= n; v++)
-    {
-        if (visited[v] == 0 && check(v,k))
-        {
-            visited[v] = 1;
-            sum += arr[v];
-            result[k] = arr[v];
-            if (k == x)
-            {
-                prinConfiguration();
+void Try(int j){
+    for(int i = 1; i <= n; i++){
+        if(a[i] <= m - sum_j(j-1) - (k-j) && !visited[i]){
+            x[j] = a[i];
+            sum += x[j];
+            visited[i] = true;
+        if(j == k){
+            if(sum == m){
+                res.insert(x);
             }
-            else Try(k+1);
-            visited[v] = 0;
-            sum -= arr[v];
+        }
+        else{
+            Try(j+1);
+        }
+        visited[i] = false;
+        sum -= x[j];
         }
     }
 }
 
-int main(void)
-{
+void print_vector(vector<int> res){
+    for(int i = 0; i < res.size(); i++){
+        cout<<res[i]<<" ";
+    }
+}
 
-    cin >> n >> x >> m;
-
-    for (int i = 1; i <= n; i++)
-    {
-        cin >> arr[i];
+int main(){
+    cin >> n>>k>>m;
+    for(int i = 1; i <= n; i++){
+        visited[i] = false;
+    }
+    
+    for(int i = 0; i <= k; i++){
+        x[i] = 0;
+    }
+    
+    for(int i = 1; i <= n; i++){
+        cin>>a[i];
     }
     Try(1);
-    cout << cnt << endl;
+    cout << res.size();
+    return 0;
 }

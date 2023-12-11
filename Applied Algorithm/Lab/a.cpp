@@ -1,23 +1,26 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
+int n,c,res=0;
+int a[30];
+int dp[100000];
 
-int main()
-{
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);cout.tie(NULL);
-    set<vector<int>> s; 
-    vector<int> x = {1,2,3};
-    vector<int> y = {1,3,2};
-    sort(y.begin(), y.end());
-    s.insert(x);
-    s.insert(y);
-    for (auto i : s) {
-        for (auto j : i) {
-            cout << j << " ";
+int main() {
+    cin>>n>>c;
+    for (int i=1;i<=n;i++) cin>>a[i];
+
+    sort(a+1,a+1+n);
+
+    dp[0]=1;
+    for (int i=1;i<=n;i++) {
+        for (int j=c-a[i];j>=0;j--) {
+            if (dp[j]) dp[j+a[i]]=1;  
         }
-        cout << endl;
+            
     }
-    return 0;
+
+    for (int i=0;i<=c;i++)
+        if (dp[i]) res=max(res,i);
+
+    cout<<res<<endl;
 }

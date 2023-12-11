@@ -1,5 +1,8 @@
 {
     "files.associations": {
         "iostream": "cpp"
-    }
+    },
+    "vscode-pets.petSize": "small",
+    "vscode-pets.petType": "dog",
+    "vscode-pets.position": "explorer"
 }

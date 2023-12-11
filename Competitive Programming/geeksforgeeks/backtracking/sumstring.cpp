@@ -1,11 +1,8 @@
+// link: https://www.geeksforgeeks.org/check-given-string-sum-string/
 #include<bits/stdc++.h>
 using namespace std;
 
 #define ll long long
-#define MAX 100000
-
-int a[MAX+1];
-
 
 int main()
 {

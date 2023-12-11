@@ -18,6 +18,8 @@ int dp[MAX];
 
 int main()
 {
+    freopen("../test-case/bai4.txt", "r", stdin);
+    // freopen("", "w", stdout);
     ios_base::sync_with_stdio(0);
     cin.tie(NULL);cout.tie(NULL);
     cin >> n;

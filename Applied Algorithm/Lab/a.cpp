@@ -1,41 +1,47 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h> 
+// Longest increasing subsequence
+
+
 using namespace std;
 
-#define ll long long
-#define mxN 1000006
-
+const int MAX = 10001;
 int n;
-int a[mxN];
+int a[MAX];
+int iMem[MAX];
 
-int main()
+int max(int a, int b)
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);cout.tie(NULL);
+    return (a > b) ? a : b;
+}
+int solve(int r)
+{
+    if (r == 1) return 1;
+
+    if (iMem[r] != -1) return iMem[r];
+
+    int res = 1;
+    for (int i = 1; i < r; i++)
+    {
+        if (a[r] > a[i])
+            res = max(res, 1 + solve(i));
+    }
+    iMem[r] = res;
+    return res;
+}
+
+int main(void)
+{
+    memset(iMem,-1,sizeof(iMem));
     freopen("test.txt", "r", stdin);
     cin >> n;
-    for (int i=0; i<n; i++) cin >> a[i];
-    int l_foot = 0, r_foot=0;
-    int head = 0;
-    int height=0, deepth = 0;
-    for (int i=1; i<n; i++) {
-        if (a[i] > a[i-1]) {
-            head = i;
-            if (r_foot == i-1) l_foot = i-1;
-        }
-        if (a[i] < a[i-1]) r_foot = i;
-        if (a[i] == a[i-1]) r_foot = l_foot = head = i;
-        if (l_foot < head && head < r_foot) height = max(height, min(r_foot-head, head-l_foot));
+    for (int i = 1; i <= n; i++)
+        cin >> a[i];
+    solve(n);
+    
+    int ans = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        ans = max(ans,iMem[i]);
     }
-    for (int i=1; i<n; i++) {
-        if (a[i] < a[i-1]) {
-            head = i;
-            if (r_foot == i-1) l_foot = i-1;
-        }
-        if (a[i] > a[i-1]) r_foot = i;
-        if (a[i] == a[i-1]) r_foot = l_foot = head = i;
-        if (l_foot < head && head < r_foot) deepth = max(deepth, min(r_foot-head, head-l_foot));
-    }
-
-    cout<<height << " " << deepth;
-    return 0;
+    cout << ans << endl;
 }

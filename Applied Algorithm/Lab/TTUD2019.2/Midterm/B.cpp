@@ -7,7 +7,7 @@ using namespace std;
 const ll MOD = 1e9+7;
 int dp[mxN][mxN];
 
-// (= +1, )= -1, ()==
+// '('= +1, ')'= -1, '()' = 0
 // dp[i][j] xét phần tử i có tổng điểm j 
 int solve(string s) {
     if (s[0] == ')') return 0;

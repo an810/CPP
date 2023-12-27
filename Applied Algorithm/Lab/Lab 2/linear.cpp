@@ -43,6 +43,5 @@ int main()
         t[i] = t[i - 1] + A[i];
     Try(1);
     cout << ans;
-
     return 0;
 }

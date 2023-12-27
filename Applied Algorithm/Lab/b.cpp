@@ -1,36 +1,49 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n,m;
-int x[10001], y[10001];
-int mem[10001][10001];
+int n;
+int c[23][23];
+int res = 99999;
+int tmp = 0;
+int x[11];
+bool visited[11];
 
-int lcs(int i, int j){
-    int res = -1;
-    if(mem[i][j] != -1) return mem[i][j];
-    if(x[i] == y[j]){
-        res = max(res, lcs(i-1, j-1) + 1);
+void Try(int k){
+    for(int i = 1; i <= n; i++){
+        if(!visited[i]){
+            x[k] = i;
+            visited[i] = true;
+            tmp = tmp + c[x[k-1] + n][x[k]] + c[x[k]][x[k] + n];
+            if(k == n){
+                tmp = tmp + c[x[k] + n][0];
+                if (tmp < res){
+                    res = tmp;
+                }
+            }
+            else{
+                Try(k + 1);
+            }
+            tmp = tmp - (c[x[k-1] + n][x[k]] + c[x[k]][x[k] + n]);
+            visited[i] = false;
+        }
     }
-    else{
-        res = max(lcs(i-1, j), lcs(i, j-1));
-    }
-    mem[i][j] = res;
-    return res;
 }
 
 int main(){
-    cin >> n >>m;
-    for(int i = 1; i <= n; i++){
-        cin >> x[i];
-    }
-    for(int j = 1; j <= m; j++){
-        cin >> y[j];
-    }
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= m; j++){
-            mem[i][j] = -1;
+    cin >> n;
+    for(int i = 0; i <= 2*n; i++){
+        for(int j = 0; j <= 2*n; j++){
+            cin >> c[i][j];
         }
     }
-    cout << lcs(n,m);
+    for(int i = 1; i <= n; i++){
+        visited[i] = false;
+    }
+    x[0] = -n;
+    Try(1);
+    cout << res<<"\n";
+    // for(int i = 1; i <= n; i++){
+    //     cout << x[i]<<" ";
+    // }
     return 0;
 }

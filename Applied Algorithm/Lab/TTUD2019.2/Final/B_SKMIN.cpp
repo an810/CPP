@@ -3,13 +3,34 @@ using namespace std;
 
 #define ll long long
 
+string s, res, t;
+int n, k, dem;
+
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(NULL);cout.tie(NULL);
-    string s;
     cin >> s;
-    int k; cin >> k;
-    
+    cin >> k;
+    stack<char> st;
+    st.push(s[0]);
+    dem = 1;
+    for (int i=1; i<s.length(); i++) {
+        while (s[i] > st.top() && (dem+s.length()-i) > k) {
+            st.pop();
+            dem--;
+            if(st.empty()) break;
+        }
+        st.push(s[i]);
+        dem++;
+    }
+    string res;
+    while(!st.empty()) {
+        res.push_back(st.top());
+        st.pop();
+    }
+    for (int i=res.length()-1, j=0; (i>=0 && j<k); i--,j++) {
+        cout << res[i];
+    }
     return 0;
 }

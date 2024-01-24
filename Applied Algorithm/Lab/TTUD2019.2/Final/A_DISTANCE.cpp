@@ -24,7 +24,7 @@ int main()
         cin >> x[i];
     int res = 0;
     for (int i=2; i<=m; i++) 
-        res += c[i-1][i];
+        res += c[x[i-1]][x[i]];
     cout << res;
     return 0;
 }
